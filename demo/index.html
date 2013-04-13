@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>ASL Font: Sign Puppet Demo</title>
+
+    <script type="text/javascript" src="../sign-puppet.js" ></script>
+
+    <!-- jQuery is not required to use sign-puppet.js -->
+    <script type="text/javascript" src="jquery.min.js" ></script>
+
+    <link rel="stylesheet" type="text/css" href="demo_style.css">
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Sign Puppet Demo</h1>
+
+    <div id="main_content">
+      <h3>Sample Poses</h3>
+      <dl class='clearfix'>
+        <dt>Body:</dt>
+        <dd>
+          <ul id="poses" class="inline">
+            <li><a href="#forward">Forward</a></li>
+            <li><a href="#out">Out</a></li>
+            <li><a href="#down">Down</a></li>
+            <li><a href="#in_pose">In</a></li>
+            <li><a href="#default_pose">Default</a></li>
+          </ul>
+        </dd>
+        <dt>Hand:</dt>
+        <dd>
+          <ul id="hand_poses" class="inline">
+            <li><a href="#s">Fist</a></li>
+            <li><a href="#5">Five</a></li>
+            <li><a href="#A">Thumb</a></li>
+            <li><a href="#1">Point</a></li>
+            <li><a href="#B">Palm</a></li>
+          </ul>
+        </dd>
+        <dt>Face:</dt>
+        <dd>
+          <ul id="face_poses" class="inline">
+            <li><a href="#wide">Up extreme</a></li>
+            <li><a href="#narrow">Down extreme</a></li>
+            <li><a href="#teeth">Teeth</a></li>
+            <li><a href="#tongue">Tongue</a></li>
+            <li><a href="#default_face">Default</a></li>
+          </ul>
+        </dd>
+      </dl>
+      <br style="clear:both">
+      <canvas id="the_canvas" width="600" height="400" style="margin:auto;display:block"></canvas>
+      <h3>Customize pose:</h3>
+      <ul id="customize" class="inline">
+        <li><a href="#left_hand_position">Left Hand</a></li>
+        <li><a href="#left_hand_pose">Left Hand Fingers</a></li>
+        <li><a href="#right_hand_position">Right Hand</a></li>
+        <li><a href="#right_hand_pose">Right Hand Fingers</a></li>
+        <li><a href="#head_and_body">Head and Body</a></li>
+      </ul>
+      <div>
+        <fieldset id="right_hand_position">
+          <label>rhx <input id="rhx" name="rhx" value="0"></label>
+          <label>rhy <input id="rhy" name="rhy" value="0"></label>
+          <label>rhz <input id="rhz" name="rhz" value="0"></label>
+          <label>rh <input id="rh" name="rh" value="0"></label>
+          <br>
+          <label>rbx <input id="rbx" name="rbx" value="0"></label>
+          <label>rby <input id="rby" name="rby" value="0"></label>
+          <label>rbz <input id="rbz" name="rbz" value="1"></label>
+          <label>rb <input id="rb" name="rb" value="1"></label>
+          <br>
+          <label>rax <input id="rax" name="rax" value="0"></label>
+          <label>ray <input id="ray" name="ray" value="0"></label>
+          <label>raz <input id="raz" name="raz" value="0"></label>
+          <label>ra <input id="ra" name="ra" value="0"></label>
+          <br>
+          <label>rpx <input id="rpx" name="rpx" value="0"></label>
+          <label>rpy <input id="rpy" name="rpy" value="0"></label>
+          <label>rpz <input id="rpz" name="rpz" value="0"></label>
+          <br>
+          <label>rrz <input id="rrz" name="rrz" value="-90"></label>
+          <label>rrx <input id="rrx" name="rrx" value="90"></label>
+          <label>rry <input id="rry" name="rry" value="0"></label>
+        </fieldset>
+        <fieldset id="right_hand_pose">
+          <label>ri0 <input id="ri0" name="ri0" value="0"></label>
+          <label>ri1 <input id="ri1" name="ri1" value="0"></label>
+          <label>ri2 <input id="ri2" name="ri2" value="0"></label>
+          <label>ris <input id="ris" name="ris" value="0"></label>
+          <br>
+          <label>rm0 <input id="rm0" name="rm0" value="0"></label>
+          <label>rm1 <input id="rm1" name="rm1" value="0"></label>
+          <label>rm2 <input id="rm2" name="rm2" value="0"></label>
+          <label>rms <input id="rms" name="rms" value="0"></label>
+          <br>
+          <label>rr0 <input id="rr0" name="rr0" value="0"></label>
+          <label>rr1 <input id="rr1" name="rr1" value="0"></label>
+          <label>rr2 <input id="rr2" name="rr2" value="0"></label>
+          <label>rrs <input id="rrs" name="rrs" value="0"></label>
+          <br>
+          <label>rp0 <input id="rp0" name="rp0" value="0"></label>
+          <label>rp1 <input id="rp1" name="rp1" value="0"></label>
+          <label>rp2 <input id="rp2" name="rp2" value="0"></label>
+          <label>rps <input id="rps" name="rps" value="0"></label>
+          <br>
+          <label>rt0x <input id="rt0x" name="rt0x" value="-1"></label>
+          <label>rt0y <input id="rt0y" name="rt0y" value="0"></label>
+          <label>rt1x <input id="rt1x" name="rt1x" value="-1"></label>
+          <label>rt1y <input id="rt1y" name="rt1y" value="0"></label>
+          <label>rt2x <input id="rt2x" name="rt2x" value="0"></label>
+        </fieldset>
+        <fieldset id="left_hand_position">
+          <label>lhx <input id="lhx" name="lhx" value="0"></label>
+          <label>lhy <input id="lhy" name="lhy" value="0"></label>
+          <label>lhz <input id="lhz" name="lhz" value="0"></label>
+          <label>lh <input id="lh" name="lh" value="0"></label>
+          <br>
+          <label>lbx <input id="lbx" name="lbx" value="0"></label>
+          <label>lby <input id="lby" name="lby" value="0"></label>
+          <label>lbz <input id="lbz" name="lbz" value="1"></label>
+          <label>lb <input id="lb" name="lb" value="1"></label>
+          <br>
+          <label>lax <input id="lax" name="lax" value="0"></label>
+          <label>lay <input id="lay" name="lay" value="0"></label>
+          <label>laz <input id="laz" name="laz" value="0"></label>
+          <label>la <input id="la" name="la" value="0"></label>
+          <br>
+          <label>lpx <input id="lpx" name="lpx" value="0"></label>
+          <label>lpy <input id="lpy" name="lpy" value="0"></label>
+          <label>lpz <input id="lpz" name="lpz" value="0"></label>
+          <br>
+          <label>lrz <input id="lrz" name="lrz" value="-90"></label>
+          <label>lrx <input id="lrx" name="lrx" value="90"></label>
+          <label>lry <input id="lry" name="lry" value="0"></label>
+        </fieldset>
+        <fieldset id="left_hand_pose">
+          <label>li0 <input id="li0" name="li0" value="0"></label>
+          <label>li1 <input id="li1" name="li1" value="0"></label>
+          <label>li2 <input id="li2" name="li2" value="0"></label>
+          <label>lis <input id="lis" name="lis" value="0"></label>
+          <br>
+          <label>lm0 <input id="lm0" name="lm0" value="0"></label>
+          <label>lm1 <input id="lm1" name="lm1" value="0"></label>
+          <label>lm2 <input id="lm2" name="lm2" value="0"></label>
+          <label>lms <input id="lms" name="lms" value="0"></label>
+          <br>
+          <label>lr0 <input id="lr0" name="lr0" value="0"></label>
+          <label>lr1 <input id="lr1" name="lr1" value="0"></label>
+          <label>lr2 <input id="lr2" name="lr2" value="0"></label>
+          <label>lrs <input id="lrs" name="lrs" value="0"></label>
+          <br>
+          <label>lp0 <input id="lp0" name="lp0" value="0"></label>
+          <label>lp1 <input id="lp1" name="lp1" value="0"></label>
+          <label>lp2 <input id="lp2" name="lp2" value="0"></label>
+          <label>lps <input id="lps" name="lps" value="0"></label>
+          <br>
+          <label>lt0x <input id="lt0x" name="lt0x" value="-1"></label>
+          <label>lt0y <input id="lt0y" name="lt0y" value="0"></label>
+          <label>lt1x <input id="lt1x" name="lt1x" value="-1"></label>
+          <label>lt1y <input id="lt1y" name="lt1y" value="0"></label>
+          <label>lt2x <input id="lt2x" name="lt2x" value="0"></label>
+        </fieldset>
+        <fieldset id="head_and_body">
+          <label>hrx <input id="hrx" name="hrx" value="0"></label>
+          <label>hry <input id="hry" name="hry" value="0"></label>
+          <label>bx <input id="bx" name="bx" value="0"></label>
+          <label>by <input id="by" name="by" value="0"></label>
+          <br>
+          <label>eby <input id="eby" name="eby" value="0"></label>
+          <label>ebx <input id="ebx" name="ebx" value="0"></label>
+          <label>e0y <input id="e0y" name="e0y" value="1"></label>
+          <label>e1y <input id="e1y" name="e1y" value="1"></label>
+          <br>
+          <label>ex <input id="ex" name="ex" value="0"></label>
+          <label>ey <input id="ey" name="ey" value="0"></label>
+          <label>ez <input id="ez" name="ez" value="1"></label>
+          <br>
+          <label>ny <input id="ny" name="ny" value="0"></label>
+          <br>
+          <label>mx <input id="mx" name="mx" value="0"></label>
+          <label>my <input id="my" name="my" value="0"></label>
+          <br>
+          <label>mly <input id="mly" name="mly" value="0"></label>
+          <label>mlz <input id="mlz" name="mlz" value="0"></label>
+          <label>mty <input id="mty" name="mty" value="0"></label>
+          <label>mtz <input id="mtz" name="mtz" value="0"></label>
+          <label>mcx <input id="mcx" name="mcx" value="0"></label>
+          <br>
+          <label>teeth <input id="teeth" name="teeth" value="0"></label>
+        </fieldset>
+      </div>
+
+    </div>
+
+    <script>
+      var poses = {
+        default_pose : {},
+        forward : {
+          rby  : 0,
+          rbz  : 1,
+          rrz  : -90,
+          rrx  : 90,
+          lby  : 0,
+          lbz  : 1,
+          lrz  : -90,
+          lrx  : 90,
+          e0y  : 1,
+          e1y  : 1,
+          ez   : 1
+        },
+        out : {
+          rby : -1,
+          rbx : 1,
+          rrz  : -35,
+          rrx  : 90,
+          lby : -1,
+          lbx : 1,
+          lrz  : -35,
+          lrx  : 90,
+          by : -.75,
+          bx : -.75
+        },
+        down : {
+          rby : 0,
+          rbx : .5,
+          rbz : 1,
+          rrz  : -80,
+          rrx  : -15,
+          lby : 0,
+          lbx : .5,
+          lbz : 1,
+          lrz  : -80,
+          lrx  : -15,
+          by : .5
+        },
+        in_pose : {
+          rby : -.75,
+          rbx : -.65,
+          rbz : -1,
+          rrz  : 80,
+          rrx  : 90,
+          lby : -.75,
+          lbx : -.65,
+          lbz : -1,
+          lrz  : 80,
+          lrx  : 90,
+          bx : .75
+        },
+        s : {
+          ri0  : 1,  ri1  : .9, ri2 : .75, ris: -.1,
+          rm0  : 1,  rm1  : .9, rm2 : .75, rms: -.1,
+          rr0  : 1,  rr1  : .9, rr2 : .75, rrs: -.1,
+          rp0  : 1,  rp1  : .9, rp2 : .75, rps: -.1,
+          rt0x : -.75, rt0y: .5, rt1x : .5, rt1y: .5, rt2x : .25
+        },
+        5 : {
+          ri0  : 0,  ri1  : 0, ri2  : 0,  ris  : 1,
+          rm0  : 0,  rm1  : 0, rm2  : 0,  rms  : 1,
+          rr0  : 0,  rr1  : 0, rr2  : 0,  rrs  : 1,
+          rp0  : 0,  rp1  : 0, rp2  : 0,  rps  : 1,
+          rt0x : -1, rt0y : 0, rt1x : -1, rt1y : 0, rt2x : 0
+        },
+        A : {
+          ri0  : 1,  ri1  : 1, ri2  : 0,  ris  : 0,
+          rm0  : 1,  rm1  : 1, rm2  : 0,  rms  : 0,
+          rr0  : 1,  rr1  : 1, rr2  : 0,  rrs  : 0,
+          rp0  : 1,  rp1  : 1, rp2  : 0,  rps  : 0,
+          rt0x : -1, rt0y : 0, rt1x : -1, rt1y : 0, rt2x : 0
+        },
+        1 : {
+          ri0  : 0,    ri1  : 0, ri2  : 0,   ris  : 0,
+          rm0  : 1,    rm1  : 1, rm2  : 0.5, rms  : 0,
+          rr0  : 1,    rr1  : 1, rr2  : 0.5, rrs  : 0,
+          rp0  : 1,    rp1  : 1, rp2  : 0.5, rps  : 0,
+          rt0x : -.75, rt0y: .5, rt1x : .75, rt1y: .5, rt2x : .25
+        },
+        B : {
+          ri0  : 0,  ri1  : 0, ri2  : 0,  ris  : 0,
+          rm0  : 0,  rm1  : 0, rm2  : 0,  rms  : 0,
+          rr0  : 0,  rr1  : 0, rr2  : 0,  rrs  : 0,
+          rp0  : 0,  rp1  : 0, rp2  : 0,  rps  : 0,
+          rt0x : -1, rt0y : 0, rt1x : -1, rt1y : 0, rt2x : 0
+        },
+        default_face : {
+          hrx : 0, hry : 0,
+          eby : 0, ebx : 0,  e0y: 1, e1y: 1,
+          ey  : 0, ex :  0,
+          ny  : 0,
+          mx  : 0, my  : 0,  mly: 0, mcx: 0,
+          mtz : 0,
+          teeth : 0
+        },
+        wide : {
+          hrx : .2, hry : -.2,
+          eby : 1,  ebx : .5,  e0y: 1.5, e1y: 1,
+          ey  : 1,  ex : 1,
+          ny  : 0,
+          mx  : 0, my  : 1,  mly: .5, mcx: 0,
+          mtz : 0,
+          teeth : 0
+        },
+        narrow : {
+          hrx : -.2, hry: .2,
+          eby : -.5, ebx : 1, e0y: .85, e1y : .75,
+          ey  : 0,  ex : -1,
+          ny  : -1,
+          mx  : -.5, my  : 0,  mly: -.5, mcx: .5,
+          mtz : 0,
+          teeth : 0
+        },
+        teeth : {
+          hrx : 0, hry : 0,
+          eby : 1, ebx : 1,  e0y: 1, e1y: .5,
+          ey  : 0, ex :  0,
+          ny  : 0,
+          mx  : 0, my  : 1,  mly: -.5, mcx: 0,
+          mtz : 0,
+          teeth : 1
+        },
+        tongue : {
+          hrx : 0, hry : 0,
+          eby : .5, ebx : 0,  e0y: .65, e1y: 1,
+          ey  : 0, ex :  0,
+          ny  : 0,
+          mx  : -.25, my  : .75,  mly: 0, mcx: 0,
+          mtz : 1, mty : .25,
+          teeth : 0
+        },
+      };
+
+      var animFrame = (function(){
+        return window.mozRequestAnimationFrame    ||
+          window.webkitRequestAnimationFrame ||
+          window.msRequestAnimationFrame     ||
+          window.oRequestAnimationFrame      ||
+          function(cb, el){
+            setTimeout(cb, 10);
+          };
+      }());
+
+      var canvas = document.getElementById('the_canvas');
+      var puppet = aslfont.SignPuppet.create();
+      var animator = puppet.getAnimator();
+      var channels = {};
+
+      var loop, render;
+      loop = function(){
+        animFrame(render, canvas);
+      };
+      render = function(){
+        canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+        animator.tween();
+        puppet.draw(canvas, canvas.width, canvas.height, 0, 0);
+        setTimeout(loop, 50);
+      };
+      setTimeout(loop, 50);
+      
+      function applyPose(pose) {
+        for (var k in pose) {
+          if (pose.hasOwnProperty(k)) {
+            $('#' + k).val(pose[k]);
+            channels[k] = pose[k];
+          }
+        }
+      }
+
+      $(document).ready(function () {
+
+        $('#customize a').each(function () {
+          $(this).click(function (e) {
+            $('fieldset').hide();
+            $($(this).attr('href')).show();
+            e.preventDefault();
+          });
+        });
+
+        $('input').each(function () {
+
+          //event
+          $(this).change(function () {
+            var v = parseFloat($(this).val());
+            if (!isNaN(v)) {
+              channels[$(this).attr('id')] = v;
+            }
+            animator.setTarget(channels);
+          });
+
+          //initial
+          var v = parseFloat($(this).val());
+          if (!isNaN(v)) {
+            channels[$(this).attr('id')] = v;
+          }
+        });
+
+        //body pose links
+        $('#poses a').each(function () {
+          $(this).click(function (e) {
+            e.preventDefault();
+            applyPose(aslfont.SignPuppet.channels);
+            applyPose(poses[$(this).attr('href').substring(1)]);
+            applyPose({rt0x : -1, rt1x : -1, lt0x : -1, lt1x : -1});
+            animator.setTarget(channels);
+          });
+        });
+
+        //other pose links
+        $('#hand_poses a, #face_poses a').each(function () {
+          $(this).click(function (e) {
+            e.preventDefault();
+            applyPose(poses[$(this).attr('href').substring(1)]);
+            animator.setTarget(channels);
+          });
+        });
+      });
+
+
+    </script>
+  </body>
+</html>

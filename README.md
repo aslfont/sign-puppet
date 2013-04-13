@@ -11,6 +11,8 @@ The goal of this project is to provide an easy to use means of delivering sign l
 
 Feedback and pull requests are welcome.
 
+[Sign Puppet Demo](http://aslfont.github.io/sign-puppet/demo/)
+
 ##Basic Usage
 
 ![This is the puppet in a neutral pose](http://github.com/aslfont/sign-puppet/raw/master/demo/default.png)
@@ -57,7 +59,7 @@ setTimeout(
 );
 ```
 
-![This is the puppet in a few sample poses](http://github.com/aslfont/sign-puppet/raw/master/demo/action_small_.png)
+![This is the puppet in a few sample poses](http://github.com/aslfont/sign-puppet/raw/master/demo/action_small.png)
 
 
 ##Animation Channels
